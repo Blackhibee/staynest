@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StayNest | Find your perfect stay</title>
+    <meta
+      name="description"
+      content="StayNest helps you discover amazing places to stay across Nigeria."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <div class="page-bg"></div>
+
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="StayNest home page">
+          <img src="assets/logo.svg" alt="StayNest logo" />
+          <span>StayNest</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#explore">Explore</a>
+          <a href="#host">Become a Host</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="index.html" class="profile-btn">Login / Profile</a>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="mobile-menu" aria-label="Mobile navigation menu">
+        <a href="#explore">Explore</a>
+        <a href="#host">Become a Host</a>
+        <a href="index.html">Login / Profile</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="listing-hero container" id="explore">
+        <div>
+          <span class="pill">StayNest listings</span>
+          <h1>Find a stay that feels like yours.</h1>
+          <p>Browse handpicked apartments, villas and homes across Nigeria.</p>
+        </div>
+        <div class="listing-count"><strong id="resultCount">30</strong><span>homes to explore</span></div>
+      </section>
+
+      <section class="listing-toolbar container" aria-label="Search and filter properties">
+        <form class="listing-search" id="listingSearch">
+          <label class="search-input"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search by city or property name" /></label>
+          <select id="typeFilter" aria-label="Property type">
+            <option value="all">All property types</option>
+            <option value="Apartment">Apartments</option>
+            <option value="Villa">Villas</option>
+            <option value="House">Houses</option>
+            <option value="Loft">Lofts</option>
+          </select>
+          <select id="sortFilter" aria-label="Sort properties">
+            <option value="recommended">Recommended</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+            <option value="rating">Highest rated</option>
+          </select>
+          <button class="search-btn" type="submit">Search</button>
+        </form>
+        <div class="filter-row">
+          <span class="filter-label">Amenities</span>
+          <label class="filter-pill"><input type="checkbox" value="Wi-Fi" /> Wi-Fi</label>
+          <label class="filter-pill"><input type="checkbox" value="Swimming pool" /> Pool</label>
+          <label class="filter-pill"><input type="checkbox" value="Workspace" /> Workspace</label>
+          <label class="filter-pill"><input type="checkbox" value="Beach access" /> Beach access</label>
+        </div>
+      </section>
+
+      <section class="properties container" aria-labelledby="all-properties">
+        <div class="section-heading listing-heading">
+          <div><span class="mini-label">Curated for you</span><h2 id="all-properties">Places people love</h2></div>
+          <span class="view-label" id="activeFilterLabel">All stays</span>
+        </div>
+        <div class="property-grid" id="propertyGrid"></div>
+        <div class="pagination" id="pagination" aria-label="Property pagination"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="host">
+      <div class="container footer-grid">
+        <div>
+          <a href="index.html" class="brand footer-brand">
+            <img src="assets/logo.svg" alt="StayNest logo" />
+            <span>StayNest</span>
+          </a>
+          <p>Helping travelers find stylish, comfortable stays in every city they love.</p>
+        </div>
+
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Become a Host</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 StayNest. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Property detail modal -->
+    <div id="propertyModal" class="property-modal" aria-hidden="true">
+      <div class="modal-overlay" data-action="close"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Property details">
+        <button class="modal-close" data-action="close" aria-label="Close details">✕</button>
+        <div class="modal-body">
+          <div class="modal-gallery" id="modalGallery"></div>
+          <div class="modal-info">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-sub" id="modalSub"></p>
+            <div class="modal-meta">
+              <span class="modal-price" id="modalPrice"></span>
+              <span class="modal-rating" id="modalRating"></span>
+            </div>
+
+            <h4>Amenities</h4>
+            <div class="modal-amenities" id="modalAmenities"></div>
+
+            <p class="modal-description" id="modalDescription"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hibee Property Management | Sign up</title>
+    <meta name="description" content="Create a Hibee Property Management account" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="brand-panel" aria-label="Branding and highlights">
+        <div class="brand-content">
+          <div class="brand-logo-wrap">
+            <img src="assets/logo.svg" alt="Hibee logo" class="brand-logo" />
+          </div>
+
+          <div class="brand-meta">
+            <span class="brand-kicker">Property management</span>
+            <h1>HIBEE</h1>
+            <p>Smart living, better operations, seamless support.</p>
+          </div>
+        </div>
+
+        <ul class="feature-list" aria-label="Key benefits">
+          <li>
+            <span class="feature-icon">✓</span>
+            <span>Manage curated homes and guest bookings</span>
+          </li>
+          <li>
+            <span class="feature-icon">✓</span>
+            <span>Discover premium stays across top Nigerian cities</span>
+          </li>
+          <li>
+            <span class="feature-icon">✓</span>
+            <span>Organize your perfect trip with ease</span>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="login-card" aria-label="Signup form">
+        <div class="login-header">
+          <p class="eyebrow">Create account</p>
+          <h2>Join StayNest today</h2>
+        </div>
+
+        <form id="signupForm" novalidate>
+          <div class="field-group">
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Enter your full name" autocomplete="name" />
+            <small class="error-message" data-error-for="fullName"></small>
+          </div>
+
+          <div class="field-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" />
+            <small class="error-message" data-error-for="email"></small>
+          </div>
+
+          <div class="field-group">
+            <label for="password">Password</label>
+            <div class="password-wrap">
+              <input id="password" name="password" type="password" placeholder="Create a password" autocomplete="new-password" />
+              <button type="button" class="toggle-password" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+            <small class="error-message" data-error-for="password"></small>
+          </div>
+
+          <div class="field-group">
+            <label for="confirmPassword">Confirm password</label>
+            <div class="password-wrap">
+              <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm your password" autocomplete="new-password" />
+            </div>
+            <small class="error-message" data-error-for="confirmPassword"></small>
+          </div>
+
+          <button class="login-button" type="submit">
+            <span class="button-text">Create account</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+
+          <div class="divider" aria-label="Or create with">
+            <span>or continue with</span>
+          </div>
+
+          <button type="button" class="google-button" id="googleCreateButton" aria-label="Continue with Google">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="#4285F4" d="M21.6 12.23c0-.7-.06-1.38-.18-2.03H12v3.85h5.39a4.63 4.63 0 0 1-2 3.04v2.52h3.24c1.89-1.74 2.97-4.31 2.97-7.38Z" />
+              <path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.63-2.43l-3.24-2.52c-.9.6-2.06.96-3.39.96-2.61 0-4.82-1.76-5.61-4.12H.88v2.65A10 10 0 0 0 12 22Z" />
+              <path fill="#FBBC05" d="M6.39 19.87A6.05 6.05 0 0 1 6 16.7V14.1H2.78A9.96 9.96 0 0 0 2 12c0-1.62.39-3.17 1.08-4.52L6.39 10.1a6.04 6.04 0 0 1-.01 9.77Z" />
+              <path fill="#EA4335" d="M12 3.98c1.47 0 2.79.5 3.83 1.49l2.86-2.86A9.99 9.99 0 0 0 2.56 7.48L6.4 9.86A6.02 6.02 0 0 1 12 3.98Z" />
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+
+          <p class="signup-copy">
+            Already have an account?
+            <a href="index.html" class="link-button">Login</a>
+          </p>
+        </form>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
