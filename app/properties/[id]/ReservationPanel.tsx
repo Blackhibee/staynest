@@ -28,7 +28,7 @@ export default function ReservationPanel({ property }: { property: HomeListing }
       return;
     }
     setIsOpening(true);
-    window.location.href = `/payment.html?id=${encodeURIComponent(property.id)}&checkIn=${checkIn}&checkOut=${checkOut}&adults=${guests}`;
+    window.location.href = `/payment?id=${encodeURIComponent(property.id)}&checkIn=${checkIn}&checkOut=${checkOut}&adults=${guests}`;
   };
 
   return <div className="reservation-panel"><p className="home-eyebrow">Plan your stay</p><form onSubmit={submit} noValidate><div className="reservation-dates"><label>Check-in<input type="date" min={today} value={checkIn} onChange={(event) => setCheckIn(event.target.value)} /></label><label>Check-out<input type="date" min={checkIn || today} value={checkOut} onChange={(event) => setCheckOut(event.target.value)} /></label></div><label>Guests<select value={guests} onChange={(event) => setGuests(event.target.value)}><option value="1">1 guest</option><option value="2">2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6 guests</option></select></label><p className="reservation-prompt">Choose your dates to see the final price and continue securely to payment.</p><p className="form-error" role="alert">{error}</p><button className="nav-host-button reservation-button" type="submit" disabled={isOpening}>{isOpening ? 'Opening payment...' : 'Reserve'}</button></form><Link className="reservation-back" href="/">Continue browsing</Link></div>;

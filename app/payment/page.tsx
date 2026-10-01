@@ -1,11 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, Suspense, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { homeListings } from '@/lib/listings';
 
 export default function PaymentPage() {
+  return <Suspense fallback={<main className="staynest-home" style={{ minHeight: '100vh', padding: 48 }}><p>Loading secure payment…</p></main>}><PaymentContent /></Suspense>;
+}
+
+function PaymentContent() {
   const params = useSearchParams();
   const propertyId = params.get('id');
   const property = homeListings.find((listing) => listing.id === propertyId);
