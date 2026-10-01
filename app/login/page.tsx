@@ -1,11 +1,17 @@
 'use client';
 
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
 
 import { auth, isFirebaseConfigured } from '../../lib/firebase';
+import styles from './login.module.css';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,8 +19,10 @@ export default function LoginPage() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [messageKind, setMessageKind] = useState<'error' | 'success'>('error');
 
   useEffect(() => {
     if (!auth) return;
@@ -25,165 +33,188 @@ export default function LoginPage() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError('');
+    setMessage('');
+    setMessageKind('error');
 
     if (!auth || !isFirebaseConfigured) {
-      setError('Add your Firebase config values to .env.local before using login or signup.');
+      setMessage('Sign-in is not available yet. StayNest needs to finish connecting its account service.');
+      return;
+    }
+
+    if (mode === 'signup' && !fullName.trim()) {
+      setMessage('Enter your full name to create an account.');
       return;
     }
 
     setLoading(true);
-
     try {
       if (mode === 'signup') {
-        if (!fullName.trim()) {
-          setError('Please enter your full name.');
-          return;
-        }
-
         await createUserWithEmailAndPassword(auth, email, password);
       } else {
         await signInWithEmailAndPassword(auth, email, password);
       }
-
       router.push('/host/dashboard');
     } catch (firebaseError: unknown) {
-      const message =
-        firebaseError instanceof Error
-          ? firebaseError.message
-          : 'Authentication failed. Please try again.';
-
-      setError(message.replace('Firebase: ', '').trim());
+      const code = typeof firebaseError === 'object' && firebaseError && 'code' in firebaseError
+        ? String(firebaseError.code)
+        : '';
+      const messages: Record<string, string> = {
+        'auth/invalid-credential': 'That email and password combination was not recognized.',
+        'auth/user-not-found': 'No account was found for that email address.',
+        'auth/wrong-password': 'That password was not recognized. Try again or reset it.',
+        'auth/email-already-in-use': 'An account already exists with that email address.',
+        'auth/weak-password': 'Choose a password with at least six characters.',
+        'auth/invalid-email': 'Enter a valid email address.',
+        'auth/too-many-requests': 'Too many attempts. Please wait a moment and try again.',
+      };
+      setMessage(messages[code] || 'We could not complete that request. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  const handlePasswordReset = async () => {
+    setMessage('');
+    setMessageKind('error');
+    if (!email.trim()) {
+      setMessage('Enter your email address first, then choose “Forgot password?” again.');
+      return;
+    }
+    if (!auth || !isFirebaseConfigured) {
+      setMessage('Password recovery is not available until StayNest account setup is complete.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setMessageKind('success');
+      setMessage('If an account exists for this email, password reset instructions are on the way.');
+    } catch {
+      setMessage('We could not send a reset email right now. Please try again shortly.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const changeMode = (nextMode: 'login' | 'signup') => {
+    setMode(nextMode);
+    setMessage('');
+  };
+
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        padding: 'clamp(32px, 8vw, 72px) 20px',
-        background:
-          mode === 'signup'
-            ? 'radial-gradient(circle at 15% 15%, rgba(121, 224, 214, 0.3), transparent 35%), radial-gradient(circle at 85% 85%, rgba(82, 129, 224, 0.35), transparent 38%), linear-gradient(135deg, #102a43 0%, #155e75 48%, #0f766e 100%)'
-            : '#f7faf8',
-      }}
-    >
-      <section
-        style={{
-          maxWidth: 560,
-          margin: '0 auto',
-          padding: 'clamp(24px, 5vw, 48px)',
-          borderRadius: 18,
-          background: 'rgba(255, 255, 255, 0.94)',
-          boxShadow: mode === 'signup' ? '0 24px 70px rgba(4, 22, 40, 0.28)' : 'none',
-        }}
-      >
-      <p className="eyebrow">StayNest account</p>
-      <h1>{mode === 'login' ? 'Log in to continue' : 'Create your account'}</h1>
-
-      <div style={{ display: 'flex', gap: 12, marginBottom: 20 }}>
-        <button
-          type="button"
-          onClick={() => setMode('login')}
-          style={{
-            flex: 1,
-            padding: '10px 16px',
-            borderRadius: 8,
-            border: '1px solid #dce5df',
-            background: mode === 'login' ? '#1f7658' : '#fff',
-            color: mode === 'login' ? '#fff' : '#14251f',
-            fontWeight: 700,
-            cursor: 'pointer',
-          }}
-        >
-          Login
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode('signup')}
-          style={{
-            flex: 1,
-            padding: '10px 16px',
-            borderRadius: 8,
-            border: '1px solid #dce5df',
-            background: mode === 'signup' ? '#1f7658' : '#fff',
-            color: mode === 'signup' ? '#fff' : '#14251f',
-            fontWeight: 700,
-            cursor: 'pointer',
-          }}
-        >
-          Sign up
-        </button>
-      </div>
-
-      <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
-        {mode === 'signup' && (
-          <label style={{ display: 'grid', gap: 8 }}>
-            <span>Full name</span>
-            <input
-              type="text"
-              value={fullName}
-              onChange={(event) => setFullName(event.target.value)}
-              placeholder="Your full name"
-              style={{ padding: '12px 14px', borderRadius: 8, border: '1px solid #dce5df' }}
-            />
-          </label>
-        )}
-
-        <label style={{ display: 'grid', gap: 8 }}>
-          <span>Email</span>
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="you@example.com"
-            required
-            style={{ padding: '12px 14px', borderRadius: 8, border: '1px solid #dce5df' }}
+    <main className={styles.page}>
+      <section className={styles.experience} aria-label="StayNest account">
+        <div className={styles.visual}>
+          <img
+            className={styles.visualImage}
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=88"
+            alt="A light-filled, thoughtfully furnished living room"
           />
-        </label>
+          <div className={styles.visualShade} />
+          <Link className={styles.visualBrand} href="/" aria-label="StayNest home">
+            <img src="/assets/logo.svg" alt="" />
+            <span>StayNest</span>
+          </Link>
+          <div className={styles.visualCopy}>
+            <span className={styles.visualEyebrow}>THOUGHTFUL STAYS ACROSS NIGERIA</span>
+            <h2>Make yourself<br />at home.</h2>
+            <p>Find a space that feels right for the journey you’re on.</p>
+            <div className={styles.locationNote}><span aria-hidden="true">⌖</span> Lagos, Nigeria</div>
+          </div>
+          <span className={styles.imageCredit}>A little room for what matters.</span>
+        </div>
 
-        <label style={{ display: 'grid', gap: 8 }}>
-          <span>Password</span>
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="********"
-            required
-            minLength={6}
-            style={{ padding: '12px 14px', borderRadius: 8, border: '1px solid #dce5df' }}
-          />
-        </label>
+        <div className={styles.formPanel}>
+          <header className={styles.panelHeader}>
+            <Link className={styles.mobileBrand} href="/" aria-label="StayNest home">
+              <img src="/assets/logo.svg" alt="" />
+              <span>StayNest</span>
+            </Link>
+            <Link className={styles.backLink} href="/">Back to exploring <span aria-hidden="true">↗</span></Link>
+          </header>
 
-        {error ? (
-          <p style={{ margin: 0, color: '#b42318', fontWeight: 600 }} role="alert">
-            {error}
-          </p>
-        ) : null}
+          <div className={styles.formContent}>
+            <p className={styles.eyebrow}>{mode === 'login' ? 'WELCOME BACK' : 'YOUR NEXT CHAPTER'}</p>
+            <h1>{mode === 'login' ? 'Good to have you back.' : 'Join StayNest.'}</h1>
+            <p className={styles.intro}>
+              {mode === 'login'
+                ? 'Sign in to pick up where your next stay begins.'
+                : 'Create an account to find stays and make yourself at home.'}
+            </p>
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            padding: '12px 18px',
-            border: 'none',
-            borderRadius: 8,
-            background: '#1f7658',
-            color: '#fff',
-            fontWeight: 700,
-            cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.8 : 1,
-          }}
-        >
-          {loading ? 'Please wait...' : mode === 'login' ? 'Log in' : 'Create account'}
-        </button>
-      </form>
+            <div className={styles.modeSwitch} role="group" aria-label="Choose account action">
+              <button className={mode === 'login' ? styles.modeActive : ''} type="button" aria-pressed={mode === 'login'} onClick={() => changeMode('login')}>Log in</button>
+              <button className={mode === 'signup' ? styles.modeActive : ''} type="button" aria-pressed={mode === 'signup'} onClick={() => changeMode('signup')}>Create account</button>
+            </div>
 
-      <p style={{ marginTop: 18, color: '#687970' }}>
-        Need to go back? <Link href="/">Home</Link>
-      </p>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              {mode === 'signup' && (
+                <label className={styles.field}>
+                  <span>Full name</span>
+                  <input
+                    type="text"
+                    value={fullName}
+                    onChange={(event) => setFullName(event.target.value)}
+                    placeholder="Your name"
+                    autoComplete="name"
+                    required
+                  />
+                </label>
+              )}
+
+              <label className={styles.field}>
+                <span>Email address</span>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  required
+                />
+              </label>
+
+              <label className={styles.field}>
+                <span>Password</span>
+                <span className={styles.passwordWrap}>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    placeholder="At least 6 characters"
+                    autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                    minLength={6}
+                    required
+                  />
+                  <button type="button" className={styles.revealButton} onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Hide password' : 'Show password'}>
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
+                </span>
+              </label>
+
+              {mode === 'login' && (
+                <button className={styles.forgotButton} type="button" onClick={handlePasswordReset} disabled={loading}>
+                  Forgot password?
+                </button>
+              )}
+
+              {message && <p className={`${styles.message} ${messageKind === 'success' ? styles.successMessage : ''}`} role={messageKind === 'error' ? 'alert' : 'status'}>{message}</p>}
+
+              <button className={styles.submitButton} type="submit" disabled={loading}>
+                {loading ? 'Please wait…' : mode === 'login' ? 'Log in' : 'Create account'}
+                {!loading && <span aria-hidden="true">→</span>}
+              </button>
+            </form>
+
+            <p className={styles.supportNote}>Need a hand? <Link href="/help">Visit StayNest support</Link></p>
+          </div>
+
+          <footer className={styles.panelFooter}>
+            <span>© 2026 StayNest</span>
+            <div><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link></div>
+          </footer>
+        </div>
       </section>
     </main>
   );
