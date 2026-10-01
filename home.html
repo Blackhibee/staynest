@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="site-info.css" />
   </head>
   <body>
     <div class="page-bg"></div>
@@ -27,12 +28,25 @@
         </a>
 
         <nav class="main-nav" aria-label="Main navigation">
-          <a href="#explore">Explore</a>
-          <a href="#host">Become a Host</a>
+          <a href="home.html" aria-current="page">Home</a>
+          <a href="explore.html">Explore</a>
+          <a href="/host/dashboard" class="host-nav-link" title="Open your StayNest host dashboard">Become a Host</a>
+          <a href="#about">About</a>
         </nav>
 
         <div class="nav-actions">
-          <a href="index.html" class="profile-btn">Login / Profile</a>
+          <div class="notification-menu">
+            <button class="notification-button" id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" aria-controls="notificationPanel">
+              <span class="bell-icon" aria-hidden="true"></span>
+              <span class="notification-dot" aria-label="3 unread notifications">3</span>
+            </button>
+            <div class="notification-panel" id="notificationPanel" hidden>
+              <div class="notification-panel-head"><strong>Notifications</strong><span>3 new</span></div>
+              <a href="explore.html" class="notification-item"><span class="notification-item-icon">★</span><span><strong>New stays added</strong><small>Explore fresh homes in Lagos and Abuja.</small></span></a>
+              <a href="explore.html?state=Ibadan" class="notification-item"><span class="notification-item-icon">⌂</span><span><strong>Ibadan is trending</strong><small>Popular homes are booking quickly.</small></span></a>
+              <a href="explore.html" class="notification-item"><span class="notification-item-icon">✓</span><span><strong>Verified homes</strong><small>Every featured stay is checked by our team.</small></span></a>
+            </div>
+          </div>
         </div>
 
         <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
@@ -43,83 +57,113 @@
       </div>
 
       <div class="mobile-menu" aria-label="Mobile navigation menu">
-        <a href="#explore">Explore</a>
-        <a href="#host">Become a Host</a>
-        <a href="index.html">Login / Profile</a>
+        <a href="home.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="/host/dashboard" class="host-nav-link" title="Open your StayNest host dashboard">Become a Host</a>
+        <a href="#about">About</a>
       </div>
     </header>
 
     <main>
-      <section class="listing-hero container" id="explore">
-        <div>
-          <span class="pill">StayNest listings</span>
-          <h1>Find a stay that feels like yours.</h1>
-          <p>Browse handpicked apartments, villas and homes across Nigeria.</p>
+      <section class="hero container" id="home-search">
+        <div class="hero-copy">
+          <span class="pill">Hibee Property Management</span>
+          <h1>Find your perfect stay</h1>
+          <p>Discover comfortable, memorable places to stay in vibrant neighborhoods and beautiful destinations across Nigeria.</p>
+
+          <form class="search-panel home-search-panel" id="homeSearch">
+            <div class="field location-field">
+              <label for="homeLocation">Location</label>
+              <input id="homeLocation" name="location" type="text" placeholder="Where are you going?" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="homeCheckIn">Check in</label>
+              <input id="homeCheckIn" name="checkIn" type="date" />
+            </div>
+            <div class="field">
+              <label for="homeCheckOut">Check out</label>
+              <input id="homeCheckOut" name="checkOut" type="date" />
+            </div>
+            <div class="field">
+              <label for="homeGuests">Guest</label>
+              <select id="homeGuests" name="guests">
+                <option value="">Add guest</option>
+                <option>1 guest</option>
+                <option>2 guests</option>
+                <option>4 guests</option>
+                <option>6 guests</option>
+                <option>8 guests</option>
+              </select>
+            </div>
+            <button class="search-btn" type="submit">Search</button>
+          </form>
+          <a class="explore-cta" href="explore.html">Explore places people love <span aria-hidden="true">→</span></a>
         </div>
-        <div class="listing-count"><strong id="resultCount">30</strong><span>homes to explore</span></div>
+
+        <div class="hero-visual" aria-label="Featured stay highlight">
+          <div class="featured-card">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Featured luxury stay" />
+            <div class="feature-badge"><span class="rating">★ 4.9</span><span class="meta">Beachfront • Lagos</span></div>
+          </div>
+          <div class="hero-trust-card"><span class="trust-check">✓</span><span><strong>Verified stays</strong><small>Trusted homes across Nigeria</small></span></div>
+          <div class="hero-availability-card"><strong>1,200+</strong><span>guest-ready homes</span></div>
+        </div>
       </section>
 
-      <section class="listing-toolbar container" aria-label="Search and filter properties">
-        <form class="listing-search" id="listingSearch">
-          <label class="search-input"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search by city or property name" /></label>
-          <select id="typeFilter" aria-label="Property type">
-            <option value="all">All property types</option>
-            <option value="Apartment">Apartments</option>
-            <option value="Villa">Villas</option>
-            <option value="House">Houses</option>
-            <option value="Loft">Lofts</option>
-          </select>
-          <select id="sortFilter" aria-label="Sort properties">
-            <option value="recommended">Recommended</option>
-            <option value="price-low">Price: low to high</option>
-            <option value="price-high">Price: high to low</option>
-            <option value="rating">Highest rated</option>
-          </select>
-          <button class="search-btn" type="submit">Search</button>
-        </form>
-        <div class="filter-row">
-          <span class="filter-label">Amenities</span>
-          <label class="filter-pill"><input type="checkbox" value="Wi-Fi" /> Wi-Fi</label>
-          <label class="filter-pill"><input type="checkbox" value="Swimming pool" /> Pool</label>
-          <label class="filter-pill"><input type="checkbox" value="Workspace" /> Workspace</label>
-          <label class="filter-pill"><input type="checkbox" value="Beach access" /> Beach access</label>
+      <section class="explore-callout container" aria-labelledby="explore-listings-heading">
+        <div><span class="mini-label">Ready when you are</span><h2 id="explore-listings-heading">Places people love</h2><p>Explore handpicked properties across every featured state.</p></div>
+        <a class="search-btn explore-link" href="explore.html">Explore properties</a>
+      </section>
+
+      <div class="notification-bar container" role="status">
+        <span class="notification-icon" aria-hidden="true">✦</span>
+        <p><strong>New on StayNest:</strong> Discover welcoming homes and flexible stays across Nigeria.</p>
+        <button type="button" class="notification-close" aria-label="Dismiss notification">×</button>
+      </div>
+
+      <section class="destinations container" id="popular-destinations" aria-labelledby="popular-heading">
+        <div class="section-heading">
+          <div><span class="mini-label">Popular right now</span><h2 id="popular-heading">Explore popular destinations</h2></div>
+        </div>
+        <div class="destination-grid">
+          <a class="destination-card city-ibadan" href="explore.html?state=Ibadan"><span class="destination-overlay"></span><span class="destination-info"><strong>Ibadan</strong><span>Explore stays</span></span></a>
+          <a class="destination-card city-lagos" href="explore.html?state=Lagos"><span class="destination-overlay"></span><span class="destination-info"><strong>Lagos</strong><span>Explore stays</span></span></a>
+          <a class="destination-card city-port-harcourt" href="explore.html?state=Port%20Harcourt"><span class="destination-overlay"></span><span class="destination-info"><strong>Port Harcourt</strong><span>Explore stays</span></span></a>
+          <a class="destination-card city-ilorin" href="explore.html?state=Ilorin"><span class="destination-overlay"></span><span class="destination-info"><strong>Ilorin</strong><span>Explore stays</span></span></a>
+          <a class="destination-card city-abuja" href="explore.html?state=Abuja"><span class="destination-overlay"></span><span class="destination-info"><strong>Abuja</strong><span>Explore stays</span></span></a>
+          <a class="destination-card city-enugu" href="explore.html?state=Enugu"><span class="destination-overlay"></span><span class="destination-info"><strong>Enugu</strong><span>Explore stays</span></span></a>
         </div>
       </section>
 
-      <section class="properties container" aria-labelledby="all-properties">
-        <div class="section-heading listing-heading">
-          <div><span class="mini-label">Curated for you</span><h2 id="all-properties">Places people love</h2></div>
-          <span class="view-label" id="activeFilterLabel">All stays</span>
-        </div>
-        <div class="property-grid" id="propertyGrid"></div>
-        <div class="pagination" id="pagination" aria-label="Property pagination"></div>
-      </section>
     </main>
+
+    <section class="brand-story"><div class="brand-story-inner"><div><span class="mini-label">The StayNest story</span><h2>Feel at home, wherever Nigeria takes you.</h2></div><div class="brand-story-copy"><p>StayNest brings travelers and thoughtful hosts together around stays that feel welcoming, comfortable, and easy to choose. From a weekend away to a longer visit, we believe the right space can make every journey feel more like your own.</p><p>Rooted in the warmth of Nigerian hospitality, we are building a more considered way to discover local places, care for guests, and share the homes that make a destination memorable.</p><a href="/about/">Get to know StayNest →</a></div></div></section>
 
     <footer class="site-footer" id="host">
       <div class="container footer-grid">
-        <div>
+        <div id="about">
           <a href="index.html" class="brand footer-brand">
             <img src="assets/logo.svg" alt="StayNest logo" />
             <span>StayNest</span>
           </a>
-          <p>Helping travelers find stylish, comfortable stays in every city they love.</p>
+          <p>Thoughtful stays and considered hospitality across Nigeria.</p>
         </div>
 
         <div>
           <h3>Company</h3>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Help</a></li>
-            <li><a href="#">Become a Host</a></li>
+            <li><a href="/about/">About StayNest</a></li>
+            <li><a href="/help/">Help &amp; Support</a></li>
+            <li><a href="mailto:staynestcustomerservice@gmail.com">Email our team</a></li>
+            <li><a href="https://wa.me/2348150526075?text=Hello%20StayNest%2C%20I%20need%20help." target="_blank" rel="noreferrer">WhatsApp 0815 052 6075</a></li>
           </ul>
         </div>
 
         <div>
           <h3>Legal</h3>
           <ul>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Privacy</a></li>
+            <li><a href="/terms/">Terms of Service</a></li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
@@ -153,6 +197,30 @@
       </div>
     </div>
 
-    <script src="home.js"></script>
+    <script>
+      const notificationButton = document.getElementById('notificationButton');
+      const notificationPanel = document.getElementById('notificationPanel');
+
+      notificationButton.addEventListener('click', () => {
+        const isOpen = notificationButton.getAttribute('aria-expanded') === 'true';
+        notificationButton.setAttribute('aria-expanded', String(!isOpen));
+        notificationPanel.hidden = isOpen;
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('.notification-menu')) {
+          notificationButton.setAttribute('aria-expanded', 'false');
+          notificationPanel.hidden = true;
+        }
+      });
+
+      document.getElementById('homeSearch').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = document.getElementById('homeLocation').value.trim().toLowerCase();
+        const states = ['Lagos', 'Abuja', 'Ibadan', 'Port Harcourt', 'Kano', 'Ilorin', 'Enugu'];
+        const state = states.find((item) => value.includes(item.toLowerCase()));
+        window.location.href = state ? `explore.html?state=${encodeURIComponent(state)}` : 'explore.html';
+      });
+    </script>
   </body>
 </html>

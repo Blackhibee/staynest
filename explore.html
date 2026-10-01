@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StayNest | Explore properties</title>
+    <meta name="description" content="Explore StayNest properties by state and preference." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <div class="page-bg"></div>
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a href="home.html" class="brand" aria-label="StayNest home page"><img src="assets/logo.svg" alt="StayNest logo" /><span>StayNest</span></a>
+        <nav class="main-nav" aria-label="Main navigation"><a href="home.html">Home</a><a href="explore.html" aria-current="page">Explore</a><a href="home.html#host">Become a Host</a><a href="home.html#about">About</a></nav>
+        <div class="nav-actions">
+          <div class="notification-menu">
+            <button class="notification-button" id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" aria-controls="notificationPanel">
+              <span class="bell-icon" aria-hidden="true"></span>
+              <span class="notification-dot" aria-label="3 unread notifications">3</span>
+            </button>
+            <div class="notification-panel" id="notificationPanel" hidden>
+              <div class="notification-panel-head"><strong>Notifications</strong><span>3 new</span></div>
+              <a href="explore.html" class="notification-item"><span class="notification-item-icon">★</span><span><strong>New stays added</strong><small>Explore fresh homes across Nigeria.</small></span></a>
+              <a href="explore.html?state=Ibadan" class="notification-item"><span class="notification-item-icon">⌂</span><span><strong>Ibadan is trending</strong><small>Popular homes are booking quickly.</small></span></a>
+              <a href="explore.html" class="notification-item"><span class="notification-item-icon">✓</span><span><strong>Verified homes</strong><small>Every featured stay is checked by our team.</small></span></a>
+            </div>
+          </div>
+        </div>
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+      <div class="mobile-menu" aria-label="Mobile navigation menu"><a href="home.html">Home</a><a href="explore.html">Explore</a><a href="home.html#host">Become a Host</a><a href="home.html#about">About</a></div>
+    </header>
+
+    <main>
+      <section class="listing-hero container">
+        <div><span class="pill">StayNest listings</span><h1>Places people love</h1><p>Explore handpicked apartments, villas and homes across every featured state.</p></div>
+      </section>
+
+      <section class="listing-toolbar container" aria-label="Search and filter properties">
+        <p class="search-prompt">Where would you like to stay? Try a city, neighborhood, or property name.</p>
+        <form class="listing-search" id="listingSearch">
+          <label class="search-input"><span class="search-label">Location</span><input id="searchInput" type="search" placeholder="Any place" /></label>
+          <label class="date-input"><span>Check in</span><input id="checkIn" type="date" aria-label="Check in date" /></label>
+          <label class="date-input"><span>Check out</span><input id="checkOut" type="date" aria-label="Check out date" /></label>
+          <label class="date-input guest-input"><span>Guest</span><select id="guestFilter" aria-label="Number of guests"><option value="">Add guest</option><option value="1">1 guest</option><option value="2">2 guests</option><option value="4">4 guests</option><option value="6">6 guests</option><option value="8">8 guests</option></select></label>
+          <button class="search-btn" type="submit">Search</button>
+        </form>
+        <div class="secondary-filters"><label class="secondary-filter-label" for="typeFilter">Filter by:</label><select id="typeFilter" aria-label="Property type"><option value="all">All property types</option><option value="Apartment">Apartments</option><option value="Villa">Villas</option><option value="House">Houses</option><option value="Loft">Lofts</option></select><select id="sortFilter" aria-label="Sort properties"><option value="recommended">Recommended</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="rating">Highest rated</option></select></div>
+        <div class="filter-row"><span class="filter-label">Amenities</span><label class="filter-pill"><input type="checkbox" value="Wi-Fi" /> Wi-Fi</label><label class="filter-pill"><input type="checkbox" value="Swimming pool" /> Pool</label><label class="filter-pill"><input type="checkbox" value="Workspace" /> Workspace</label><label class="filter-pill"><input type="checkbox" value="Beach access" /> Beach access</label></div>
+      </section>
+
+      <section class="properties container" aria-labelledby="all-properties">
+        <div class="section-heading listing-heading"><div><span class="mini-label">Curated for you</span><h2 id="all-properties">Find your next stay</h2></div><span class="view-label"><strong id="resultCount">0</strong> stays</span></div>
+        <div class="property-grid" id="propertyGrid"></div>
+        <div class="pagination" id="pagination" aria-label="Property pagination"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="host"><div class="container footer-grid"><div><a href="home.html" class="brand footer-brand"><img src="assets/logo.svg" alt="StayNest logo" /><span>StayNest</span></a><p>Thoughtful stays and considered hospitality across Nigeria.</p></div><div><h3>Company</h3><ul><li><a href="/about/">About StayNest</a></li><li><a href="/help/">Help &amp; Support</a></li><li><a href="home.html#host">Become a Host</a></li><li><a href="mailto:staynestcustomerservice@gmail.com">Email our team</a></li><li><a href="https://wa.me/2348150526075?text=Hello%20StayNest%2C%20I%20need%20help." target="_blank" rel="noreferrer">WhatsApp 0815 052 6075</a></li></ul></div><div><h3>Legal</h3><ul><li><a href="/terms/">Terms of Service</a></li><li><a href="/privacy/">Privacy Policy</a></li></ul></div></div><div class="container footer-bottom"><p>© 2026 StayNest. All rights reserved.</p></div></footer>
+    <script src="home.js"></script>
+  </body>
+</html>

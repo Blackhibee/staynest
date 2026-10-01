@@ -9,18 +9,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="property-detail.css" />
+    <style>
+      .property-operations { padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .map-action { display: inline-block; margin-top: 10px; color: var(--green); font-weight: 700; }
+      .host-action-message { grid-column: 1 / -1; margin: 8px 0 0; color: var(--green); font-size: .85rem; font-weight: 700; }
+      .operations-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .operations-grid > div { display: grid; gap: 5px; padding: 14px; border-radius: 12px; background: var(--pale); }
+      .operations-grid strong, .operations-grid span { display: block; }
+      .operations-grid strong { font-size: .82rem; }
+      .operations-grid span { color: var(--muted); font-size: .82rem; line-height: 1.5; }
+      @media (max-width: 640px) { .operations-grid { grid-template-columns: 1fr; } }
+    </style>
   </head>
   <body>
     <header class="detail-nav">
       <div class="detail-container nav-inner">
         <a class="detail-brand" href="home.html" aria-label="Back to StayNest listings"><img src="assets/logo.svg" alt="" /> StayNest</a>
-        <nav aria-label="Property navigation"><a href="home.html#explore">Explore</a><a href="home.html">Saved homes</a><a href="index.html" class="nav-login">Log in</a></nav>
+        <nav aria-label="Property navigation"><a href="home.html">Home</a><a href="explore.html">Explore</a><a href="index.html" class="nav-login">Log in</a></nav>
         <button class="nav-menu" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </header>
 
     <main class="detail-container" id="propertyPage" hidden>
-      <a class="back-link" href="home.html">← Back to all properties</a>
+      <a class="back-link" href="explore.html">← Back to all properties</a>
       <section class="photo-gallery" aria-label="Property photos">
         <img id="mainPhoto" class="main-photo" src="" alt="" />
         <div class="additional-photos" id="additionalPhotos"></div>
@@ -32,6 +43,7 @@
           <div class="property-heading"><div><p class="eyebrow" id="propertyType"></p><h1 id="propertyName"></h1><p class="location-line" id="propertyLocation"></p></div><div class="detail-rating" id="propertyRating"></div></div>
           <div class="spec-grid" id="propertySpecs"></div>
           <section class="detail-section"><h2>About this place</h2><p id="propertyDescription"></p></section>
+          <section class="detail-section property-operations"><h2>Stay details</h2><div class="operations-grid"><div><strong>Bedrooms</strong><span id="propertyBedrooms"></span></div><div><strong>Security</strong><span id="propertySecurity"></span></div><div><strong>Electricity</strong><span id="propertyElectricity"></span></div><div><strong>Modern facilities</strong><span id="propertyFacilities"></span></div></div></section>
           <section class="detail-section"><h2>Amenities</h2><div class="amenity-grid" id="amenityList"></div></section>
           <section class="detail-section host-section"><div class="host-avatar" id="hostAvatar"></div><div><h2 id="hostName"></h2><p>Host since 2022 · Responds within an hour</p></div><button class="outline-button" type="button">Contact host</button><button class="host-link" type="button">View host</button></section>
           <section class="detail-section"><h2>Where you'll be</h2><p id="mapLabel"></p><div class="map-placeholder" role="img" aria-label="Placeholder map showing the property location"><span>◎</span><strong>Map preview</strong><small>Exact location is shared after reservation</small></div></section>
@@ -39,18 +51,18 @@
 
         <aside class="booking-card" aria-label="Reservation form">
           <div class="booking-price"><strong id="bookingPrice"></strong><span>night</span></div>
-          <form id="bookingForm">
-            <div class="date-fields"><label>Check-in<input type="date" required /></label><label>Check-out<input type="date" required /></label></div>
-            <label>Guests<select id="guestCount"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4 guests</option><option>6 guests</option><option>8 guests</option></select></label>
+          <form id="bookingForm" novalidate>
+            <div class="date-fields"><label>Check-in<input id="detailCheckIn" type="date" required /></label><label>Check-out<input id="detailCheckOut" type="date" required /></label></div>
+            <label>Guests<select id="guestCount"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="6">6 guests</option><option value="8">8 guests</option></select></label>
+            <p class="booking-form-error" id="detailBookingError" role="alert"></p>
             <button class="reserve-button" type="submit">Reserve</button>
-            <p class="booking-note">You won't be charged yet.</p>
           </form>
         </aside>
       </div>
 
-      <section class="related-section"><div class="section-heading"><div><p class="eyebrow">More places to stay</p><h2>Recommended properties</h2></div><a href="home.html">See all</a></div><div class="related-grid" id="relatedProperties"></div></section>
+      <section class="related-section"><div class="section-heading"><div><p class="eyebrow">More places to stay</p><h2>Recommended properties</h2></div><a href="explore.html">See all</a></div><div class="related-grid" id="relatedProperties"></div></section>
     </main>
-    <div class="status-message" id="statusMessage" role="status">Property not found. <a href="home.html">Return to listings</a></div>
+    <div class="status-message" id="statusMessage" role="status">Property not found. <a href="explore.html">Return to listings</a></div>
     <div class="lightbox" id="photoLightbox" aria-hidden="true"><button type="button" aria-label="Close photo viewer" id="closeLightbox">×</button><img id="lightboxPhoto" src="" alt="" /></div>
     <script src="property-detail.js"></script>
   </body>

@@ -1,5 +1,30 @@
 import Link from 'next/link';
 
 export default function HostOnboardingPage() {
-  return <main style={{ padding: 48, maxWidth: 720, margin: '0 auto' }}><p className="eyebrow">Host onboarding</p><h1>Tell us about you</h1><p>Complete your host profile with your name, phone number, profile photo, bio and preferred contact method. Your role will remain guest until onboarding and property review are complete.</p><div className="host-card"><h2>Next implementation step</h2><p>This route is ready for the Firebase-authenticated onboarding form. Configure Firebase and install dependencies first so profile updates are securely written with the authenticated UID.</p><Link className="cta" href="/become-a-host">Back to hosting</Link></div></main>;
+  return (
+    <main className="host-page">
+      <header className="host-nav">
+        <Link className="host-brand" href="/">StayNest</Link>
+        <Link href="/host/dashboard">Open host dashboard →</Link>
+      </header>
+      <section className="host-content">
+        <p className="eyebrow">Your host journey</p>
+        <h1>Welcome to your Host Studio.</h1>
+        <p>Set up your host profile when you’re ready, or head straight to your workspace to explore your dashboard.</p>
+        <div className="benefits">
+          <article className="host-card">
+            <h2>Go to your workspace</h2>
+            <p>See your overview, properties, bookings, messages, earnings, reviews and account settings.</p>
+            <Link className="cta" href="/host/dashboard">Open host dashboard</Link>
+          </article>
+          <article className="host-card">
+            <h2>Start a property listing</h2>
+            <p>Add your property details and continue building your hosting profile.</p>
+            <Link className="cta" href="/host/properties/new">Add a property</Link>
+          </article>
+        </div>
+        <p className="footer-note">You can return to your dashboard at any time from the host workspace.</p>
+      </section>
+    </main>
+  );
 }

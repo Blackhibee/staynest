@@ -1,0 +1,1 @@
+.home-footer .home-container{gap:18px;flex-wrap:wrap}.home-footer nav{display:flex;flex-wrap:wrap;align-items:center;gap:16px}.home-footer nav a{color:#dcece2;font-size:.88rem}.home-footer nav a:hover{text-decoration:underline}@media(max-width:700px){.home-footer .home-container{align-items:flex-start;flex-direction:column}.home-footer nav{gap:12px 18px}}

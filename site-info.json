@@ -1,0 +1,130 @@
+{
+  "contact": {
+    "email": "staynestcustomerservice@gmail.com",
+    "phone": "0815 052 6075",
+    "whatsapp": "https://wa.me/2348150526075?text=Hello%20StayNest%2C%20I%20need%20help."
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "The StayNest story",
+      "title": "Feel at home, wherever Nigeria takes you.",
+      "intro": "StayNest helps travelers find welcoming places to stay and gives thoughtful hosts a simpler way to share them. We believe the best trips begin with a space that feels right and support that feels close by.",
+      "sections": [
+        {
+          "title": "A more thoughtful way to stay",
+          "body": "From a weekend in Lagos to a longer visit with family, finding a place should feel clear and considered. StayNest brings useful listing details, comfortable homes, and local discovery together so guests can choose with confidence."
+        },
+        {
+          "title": "Good hosting deserves good tools",
+          "body": "Behind every memorable stay is a host who cares about the details. We are building a workspace that helps hosts manage their listings, bookings, availability, and guest conversations with less friction."
+        },
+        {
+          "title": "Rooted in hospitality",
+          "body": "StayNest is shaped by the warmth of Nigerian hospitality: thoughtful welcomes, helpful recommendations, and room for every journey. Wherever you are headed, we want your stay to feel personal, comfortable, and well considered."
+        }
+      ],
+      "principles": [
+        { "title": "Choose with clarity", "body": "Useful details help guests find a stay that suits their plans." },
+        { "title": "Host with confidence", "body": "Practical tools keep the important parts of hosting close at hand." },
+        { "title": "Travel with care", "body": "Responsive support helps people feel looked after along the way." }
+      ]
+    },
+    "help": {
+      "eyebrow": "StayNest care",
+      "title": "How can we help?",
+      "intro": "Find a quick answer below or contact our customer care team. Share your booking reference when you write so we can point you in the right direction.",
+      "faqs": [
+        {
+          "question": "How do I find a place to stay?",
+          "answer": "Search by destination and review each listing's location, amenities, house rules, dates, and price before choosing a stay."
+        },
+        {
+          "question": "How do I ask about a reservation?",
+          "answer": "Use the contact options in your booking details or message our customer care team with your booking reference and the email address on your account."
+        },
+        {
+          "question": "Can I change or cancel a booking?",
+          "answer": "Available changes and refunds depend on the reservation and the cancellation terms shown for that stay. Check your confirmation first, then contact us if you need help."
+        },
+        {
+          "question": "How do I list my property?",
+          "answer": "Visit Become a Host to learn about hosting and begin setting up your property. Our team can help if you get stuck."
+        },
+        {
+          "question": "What should I include when contacting support?",
+          "answer": "Tell us whether you are a guest or host, describe what happened, and include the relevant booking or property reference. Please do not send passwords or full payment card details."
+        }
+      ]
+    },
+    "terms": {
+      "eyebrow": "StayNest policies",
+      "title": "Terms of Service",
+      "intro": "These terms explain the basic expectations for using StayNest as a guest or host. Booking-specific details and policies shown during a reservation also apply.",
+      "updated": "October 1, 2026",
+      "notice": "This is a working draft. Before public launch, confirm it against StayNest's actual booking, payment, cancellation, and hosting practices and obtain appropriate legal review.",
+      "sections": [
+        {
+          "title": "Using StayNest",
+          "body": "StayNest provides tools to discover accommodation and connect guests with hosts. By using the service, you agree to provide accurate information, respect other users, and follow these terms and the rules shown for each listing."
+        },
+        {
+          "title": "Accounts and eligibility",
+          "body": "Keep your account information current and protect your sign-in details. You are responsible for activity carried out through your account. Contact us promptly if you believe someone has accessed it without permission."
+        },
+        {
+          "title": "Reservations and payments",
+          "body": "Review dates, guest counts, listing details, total charges, house rules, and cancellation terms before submitting a reservation. A booking is subject to the confirmation shown in the booking flow. Payment and refund details must be displayed clearly before a reservation is completed."
+        },
+        {
+          "title": "Guest and host responsibilities",
+          "body": "Guests must respect the property, follow house rules, and communicate changes promptly. Hosts must keep listing information and availability accurate, communicate material requirements before confirmation, and provide the stay described in the listing."
+        },
+        {
+          "title": "Changes, cancellations, and problems",
+          "body": "The cancellation terms attached to a reservation govern available changes and refunds. If a stay is disrupted or a listing materially differs from its description, contact StayNest as soon as possible with relevant details so the issue can be reviewed."
+        },
+        {
+          "title": "Respectful and lawful use",
+          "body": "Do not misuse the service, misrepresent a property, harass another person, or submit content you do not have the right to share. StayNest may review reports and take proportionate action where the service or another user's safety is at risk."
+        },
+        {
+          "title": "Service updates",
+          "body": "We may update features and these terms as StayNest develops. Material changes should be communicated through the service or another appropriate channel. Continued use after an update takes effect means you accept the revised terms, where permitted by law."
+        }
+      ]
+    },
+    "privacy": {
+      "eyebrow": "Your information",
+      "title": "Privacy Policy",
+      "intro": "Your trust matters. This policy describes, at a high level, how information shared through StayNest may be used to support accounts, reservations, hosting, and customer care.",
+      "updated": "October 1, 2026",
+      "notice": "This is a working draft. Confirm the actual data collected, service providers, retention periods, and applicable privacy requirements before public launch.",
+      "sections": [
+        {
+          "title": "Information you provide",
+          "body": "Depending on how you use StayNest, this may include your name, email address, phone number, account details, reservation information, messages, property details, and information you send to customer care. Do not send passwords or full payment card details through support channels."
+        },
+        {
+          "title": "How information is used",
+          "body": "Information may be used to operate accounts, coordinate reservations between guests and hosts, provide customer support, respond to safety or service issues, and maintain and improve StayNest."
+        },
+        {
+          "title": "When information is shared",
+          "body": "Information may be shared with the guest, host, or service provider involved when needed to arrange a requested stay or provide the service. We may also disclose information where required by law or needed to address a serious safety or security concern."
+        },
+        {
+          "title": "Your choices and requests",
+          "body": "You may contact us to ask about the personal information associated with your account or to request a correction or deletion. We may need to verify your identity and retain certain records where required for legitimate operational or legal reasons."
+        },
+        {
+          "title": "Security and retention",
+          "body": "We take reasonable steps to protect information and retain it only as needed for the purposes described in this policy or as required by law. No online service can promise that information is completely secure."
+        },
+        {
+          "title": "Policy updates",
+          "body": "We may revise this policy as the service changes. The date above indicates when this draft was last updated. Significant changes should be communicated through the service or another appropriate channel."
+        }
+      ]
+    }
+  }
+}

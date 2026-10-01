@@ -5,6 +5,7 @@ const passwordInput = document.getElementById('password');
 const loginButton = document.getElementById('loginButton');
 const togglePasswordButton = document.querySelector('.toggle-password');
 const googleButton = document.getElementById('googleButton');
+const appleButton = document.getElementById('appleButton');
 const googleCreateButton = document.getElementById('googleCreateButton');
 
 const setFieldError = (field, message) => {
@@ -136,6 +137,12 @@ if (form) {
 if (googleButton) {
   googleButton.addEventListener('click', () => {
     redirectToHome(googleButton, 'Google login successful');
+  });
+}
+
+if (appleButton) {
+  appleButton.addEventListener('click', () => {
+    redirectToHome(appleButton, 'Apple login successful');
   });
 }
 

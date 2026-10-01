@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './reservation.css';
+import './host-dashboard.css';
+import '../site-info.css';
+import './home-footer.css';
 
 export const metadata: Metadata = {
   title: 'StayNest',
